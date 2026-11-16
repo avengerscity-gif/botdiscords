@@ -1508,16 +1508,12 @@ async def ping(interaction: discord.Interaction):
 # =========================
 @bot.event
 async def on_ready():
-    guild = discord.Object(id=GUILD_ID)
 
-    try:
-        bot.add_view(ReportView())
-    except Exception:
-        pass
+    # HAPUS SEMUA GLOBAL COMMAND
+    bot.tree.clear_commands(guild=None)
+    await bot.tree.sync()
 
-    synced = await bot.tree.sync(guild=guild)
-
-    print(f"✅ Synced {len(synced)} guild command(s)")
+    print("✅ Semua global command sudah dihapus.")
     print(f"✅ Bot ready! {bot.user}")
 
 
